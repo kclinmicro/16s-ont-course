@@ -2,6 +2,7 @@
 
 - Närvarande: AN, SL
 
+- [x] Boka genomgång med Rodrigo
 - [ ] Skapa slides
   - [ ] ONT 16S översikt
   - [ ] Emu
