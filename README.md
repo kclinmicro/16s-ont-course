@@ -1,2 +1,16 @@
-# 16s-ont-course
-Project repo for 16s ONT course in ECDC in June 2026
+# Course material for: GenEpi-BioTrain VT27: Clinical application of Nanopore-based 16S metagenomic sequencing for diagnostics
+
+Project repo for following course on bioinformatics for 16S sequencing analysis
+on ONT, to be given at the ECDC course portal in June 2026:
+
+[GenEpi-BioTrain - Virtual Training 27 - Clinical application of Nanopore-based 16S metagenomic sequencing for diagnostics](https://learning.ecdc.europa.eu/enrol/index.php?id=1258)
+
+## Exercises
+
+For the exercises, see the `/exercises` folder, or the links below:
+
+1. [Exercise 1](https://github.com/kclinmicro/16s-ont-course/tree/main/exercises/01)
+2. [Exercise 2](https://github.com/kclinmicro/16s-ont-course/tree/main/exercises/02)
+3. [Exercise 3](https://github.com/kclinmicro/16s-ont-course/tree/main/exercises/03)
+4. [Exercise 4](https://github.com/kclinmicro/16s-ont-course/tree/main/exercises/04)
+1. [Exercise 5](https://github.com/kclinmicro/16s-ont-course/tree/main/exercises/05)
