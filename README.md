@@ -9,8 +9,6 @@ on ONT, to be given at the ECDC course portal in June 2026:
 
 For the exercises, see the `/exercises` folder, or the links below:
 
-1. [Exercise 1](https://github.com/kclinmicro/16s-ont-course/tree/main/exercises/01)
-2. [Exercise 2](https://github.com/kclinmicro/16s-ont-course/tree/main/exercises/02)
-3. [Exercise 3](https://github.com/kclinmicro/16s-ont-course/tree/main/exercises/03)
-4. [Exercise 4](https://github.com/kclinmicro/16s-ont-course/tree/main/exercises/04)
-1. [Exercise 5](https://github.com/kclinmicro/16s-ont-course/tree/main/exercises/05)
+1. [Exercise 1: Install and run Emu](https://github.com/kclinmicro/16s-ont-course/tree/main/exercises/01)
+2. [Exercise 2: Install and run Trana and TranaVy via install script](https://github.com/kclinmicro/16s-ont-course/tree/main/exercises/02)
+3. [Exercise 3: Extract selected reads](https://github.com/kclinmicro/16s-ont-course/tree/main/exercises/03)
