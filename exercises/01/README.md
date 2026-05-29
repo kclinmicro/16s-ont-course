@@ -89,3 +89,5 @@ using Pixi instead of Conda, for greater speed and flexibility.
     ```
 
 ## Run Emu on some test data
+
+- **May 30, 2026: This part is currently being updated**
