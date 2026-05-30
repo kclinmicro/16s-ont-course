@@ -70,6 +70,7 @@ using Pixi instead of Conda, for greater speed and flexibility.
         which will only print the current working directory in square brackets,
         and a dollar sign. An even simpler version with just a dollar sign,
         would be `export PS1="$ "`.
+
 7. Now you can install Emu via Pixi:
 
     ```bash
@@ -88,6 +89,95 @@ using Pixi instead of Conda, for greater speed and flexibility.
     emu abundance -h
     ```
 
+9. Before running on real data we also need to install the OSF Client in order
+   to download the pre-built EMU database:
+
+    ```bash
+    pixi add osfclient
+    ```
+
+10. Then we can use the instructions in the [Emu readme](https://github.com/treangenlab/emu#1-download-database)
+    for downloading the default database via OSF. We need to create directory
+    for it first though, and download it there, as the tar doesn't include one.
+
+    ```bash
+    mkdir emudb
+    cd emudb
+    osf -p 56uf7 fetch osfstorage/emu-prebuilt/emu.tar
+    ```
+
+    (The `-p` flag is for the project ID)
+
+11. We unpack the tar, and move out of the `emudb` folder again:
+
+    ```bash
+    tar -xvf emu.tar
+    cd ..
+    ```
+
+12. Done! Now we can run `emu abundance`, poinding to this `emudb` folder as
+    the database, in the next step.
+
 ## Run Emu on some test data
 
-- **May 30, 2026: This part is currently being updated**
+1. Download the test data tarball:
+    Download the tar ball from [this link](https://learning.ecdc.europa.eu/mod/resource/view.php?id=43368) and
+    save it in the folder where you created the pixi environment above.
+
+    ```bash
+    wget https://github.com/kclinmicro/16s-ont-course/releases/download/v0.0.1/16s-course-data.tar.gz
+    ```
+
+2. Unpack the tarball:
+
+   ```bash
+   tar -zxvf 16s-course-data.tar.gz
+   ```
+
+3. You can look at how the file structure looks:
+
+    ```bash
+    $ tree data
+    data
+    ├── 16s_ont_example
+    │   ├── 16s_ont_example
+    │   │   └── 20260101_1200_X1_FBB32095_15aa3986
+    │   │       ├── fastq_pass
+    │   │       │   ├── barcode01
+    │   │       │   │   └── FBB32095_pass_barcode01_15aa3986_bbffde72_0.fastq.gz
+    │   │       │   ├── barcode02
+    │   │       │   │   └── FBB32095_pass_barcode02_15aa3986_bbffde72_0.fastq.gz
+    │   │       │   └── barcode03
+    │   │       │       └── FBB32095_pass_barcode03_15aa3986_bbffde72_0.fastq.gz
+    │   │       └── final_summary_FBB32095_15aa3986_bbffde72.txt
+    │   └── 16s_ont_example.csv
+    ├── emu_data
+    │   ├── 16sneg.fq.gz
+    │   ├── 16spos.fq.gz
+    │   └── sample01.fq.gz
+    └── LICENSE.txt
+
+    8 directories, 9 files
+    ```
+
+    We will use the three files in `data/emu_data` in this exercise.
+
+4. Try running Emu on one of the samples:
+
+   ```
+   emu abundance \
+     --db emudb \
+     --type map-ont \
+     --output-dir emuout \
+     --threads 2 \
+     --keep-files \
+     --keep-counts \
+     --keep-read-assignments \
+     data/emu_data/sample01.fq.gz
+   ```
+
+5. Done! Now we can look at the abundance table in the terminal:
+
+    ```bash
+    column -t -s $'\t' out/sample01.fq_rel-abundance.tsv | less -S
+    ```
