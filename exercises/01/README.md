@@ -212,14 +212,38 @@ using Pixi instead of Conda, for greater speed and flexibility.
     tree emuout
     ```
 
+    We start with changing directory to the `emuout` folder:
+
+    ```bash
+    cd emuout
+    ```
+
     To view the main output, with the relative abundances, you can use this
     command:
 
     ```bash
-    column -t -s $'\t' emuout/sample01.fq_rel-abundance.tsv | less -S
+    cat sample01.fq_rel-abundance.tsv | column -t -s $'\t' | less -S
     ```
 
     To think about: Why do you think we use the `column -t` command, and why do
     you think we supply a `TAB` charater to the `-s` flag of this command?
 
     And, why do we set the `-S` flag to `less`? How can you check this?
+
+6. As you can see above, the table is not sorted by abundance. To create a
+   sorted file we can use the GNU `sort` command:
+
+    ```bash
+    cat sample01.fq_rel-abundance.tsv | sort -r -k 2,2 > sample01.abundance.tsv
+    ```
+
+    And then we can look at this file with the command we used above:
+
+    ```bash
+    cat sample01.abundance.tsv | column -t -s $'\t' | less -S
+    ```
+
+    *(Note: We don't strictly need to run `cat` at first, but could instead use
+    `sort` or `column` directly, but starting with a simple `cat` makes it
+    easier to re-use the commands from history (with the up-arrow on the
+    termina) and modify it, based on what you want to see).*
