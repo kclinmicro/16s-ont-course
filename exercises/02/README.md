@@ -164,8 +164,23 @@ data and run Trana on it.
     If you are using a local laptop, you might be able to use a slightly higher
     number of cores and memory, depending on your laptop's hardware specs.
 
+4. Adjust downsampling level.
 
-4. Now we are ready to run the pipeline using the start script.
+    The scripts right now are a little brittle and requires some downsampling to happen.
+    Since the test datasets are already quite small, we need to change the max_samplesize
+    to something that is surely smaller than the raw datasets.
+
+    Open the file `/data/trana/run/detect-data-and-run.sh` and change according
+    to this diff, to set the `max_samplesize` to 500 (reads):
+
+    ```diff
+     outdir=${tranadir}/output
+    -max_samplesize=30000
+    +max_samplesize=500
+     sleep_seconds_before_start=1
+    ```
+
+5. Now we are ready to run the pipeline using the start script.
 
     We first move to the run folder, where the run scripts are and where also
     all logs will be stored, in a `logs` folder:
@@ -180,7 +195,47 @@ data and run Trana on it.
     ./detect-data-and-run.sh
     ```
 
-    Note that this can take possibly several hours, due to very long times for
-    pulling down Singularity images!
+    **Note that this can take possibly several hours, due to very long times for
+    pulling down Singularity images!**
 
-    *(To be continued!)*
+    You might want to work on other exercises in parallel.
+
+6. When the above command is complete, we are ready to explore the outputs of
+   the pipeline.
+
+    Go into the output folder:
+
+    ```bash
+    cd /data/trana/output
+    ```
+
+    Enter the folder named `16s_ont_example-<date>-<time>`. E.g:
+
+    ```bash
+    cd 16s_ont_example-*
+    ```
+
+    Hint: If you for some reason have multiple folder here, e.g. due to
+    interrupted runs or similar, you can check which one of them contains most
+    data with the `du` (disk usage) command:
+
+    ```bash
+    du -sh *
+    ```
+
+    Once inside the correct results folder, explore the various output folders.
+
+    We recommend to start with:
+    - `reports/`
+    - `krona/`
+
+    Note that to view HTML files from GitHub codespaces, you might need to
+    download them first (right click in the file viewer to the left pane and
+    click "Download").
+
+    Additionally, if you want to investigate what took the longest time in the pipeline,
+    you might check out `pipeline_info/execution_timeline_*.html`
+
+    Hint: Use the TAB key to auto-complete the folder name for you)
+
+7. That's it - we're done!
