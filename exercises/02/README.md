@@ -1,5 +1,8 @@
 # Exercise 2: Install and run the Emu-based Trana pipeline
 
+*(Note that you can view an outline of this document by clicking the icon that
+looks like a bullet point list, to the far right just above the header above)*
+
 In this exercise we will install the
 [Trana](https://github.com/genomic-medicine-sweden/TRANA) pipeline, developed
 by [Frans Wallin](https://www.linkedin.com/in/frans-wallin-4bb570153/), [Ryan Kennedy](https://www.linkedin.com/in/ryan-james-kennedy/), us at Karolinska and others within Genomic
