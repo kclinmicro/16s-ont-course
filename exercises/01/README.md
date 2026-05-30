@@ -178,26 +178,45 @@ using Pixi instead of Conda, for greater speed and flexibility.
 
     We will use the three files in `data/emu_data` in this exercise.
 
-4. Try running Emu on one of the samples:
+4. Running Emu
 
-   ```
-   emu abundance \
-     --db emudb \
-     --type map-ont \
-     --output-dir emuout \
-     --threads 2 \
-     --keep-files \
-     --keep-counts \
-     --keep-read-assignments \
-     data/emu_data/sample01.fq.gz
-   ```
+    First check the options available to Emu's main command, `abundance`:
+
+    ```bash
+    emu abundance -h
+    ```
+
+    Then try to run Emu on the sample data with this command (make sure you
+    understand what each flag does!):
+
+    ```
+    emu abundance \
+      --db emudb \
+      --type map-ont \
+      --output-dir emuout \
+      --threads 2 \
+      --keep-files \
+      --keep-counts \
+      --keep-read-assignments \
+      data/emu_data/sample01.fq.gz
+    ```
 
 5. Done! Now we can look at the abundance table in the terminal:
 
     Now you should be able to look at the files generated:
 
+    ```bash
+    tree emuout
     ```
 
+    To view the main output, with the relative abundances, you can use this
+    command:
+
     ```bash
-    column -t -s $'\t' out/sample01.fq_rel-abundance.tsv | less -S
+    column -t -s $'\t' emuout/sample01.fq_rel-abundance.tsv | less -S
     ```
+
+    To think about: Why do you think we use the `column -t` command, and why do
+    you think we supply a `TAB` charater to the `-s` flag of this command?
+
+    And, why do we set the `-S` flag to `less`? How can you check this?
