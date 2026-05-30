@@ -204,13 +204,18 @@ using Pixi instead of Conda, for greater speed and flexibility.
       data/emu_data/sample01.fq.gz
     ```
 
-5. Done! Now we can look at the abundance table in the terminal:
+5. Done! Now we can look at the abundance table in the next section.
 
+## Looking at Emu output
+
+1. Explore the output files
     Now you should be able to look at the files generated:
 
     ```bash
     tree emuout
     ```
+
+2. Look at the main output file.
 
     We start with changing directory to the `emuout` folder:
 
@@ -230,7 +235,7 @@ using Pixi instead of Conda, for greater speed and flexibility.
 
     And, why do we set the `-S` flag to `less`? How can you check this?
 
-6. As you can see above, the table is not sorted by abundance. To create a
+3. As you can see above, the table is not sorted by abundance. To create a
    sorted file we can use the GNU `sort` command:
 
     ```bash
@@ -247,3 +252,8 @@ using Pixi instead of Conda, for greater speed and flexibility.
     `sort` or `column` directly, but starting with a simple `cat` makes it
     easier to re-use the commands from history (with the up-arrow on the
     termina) and modify it, based on what you want to see).*
+
+## Summary
+
+That's it for now. Now you know how to install and run Emu, and look at it's
+main output file.
