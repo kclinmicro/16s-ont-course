@@ -1,5 +1,8 @@
 # Exercise 1: Install and run Emu
 
+*(Note that you can view an outline of this document by clicking the icon that
+looks like a bullet point list, to the far right just above the header above)*
+
 ## Dependencies
 
 This guide assumes you have access to a Linux environment, as highlighted in
