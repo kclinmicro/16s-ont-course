@@ -117,25 +117,19 @@ data and run Trana on it.
     `16s_ont_*`, so it is important that we keep this part of the name as is.
 
 2. Now another thing we need before staring, is to have a "barcode sheet",
-   which maps the barcodes used in the sequencing, to sample names. The run
-   script we will use expect such a barcode file in the
-   `/data/trana/barcodesheets` directory, with the same name as the data
-   folder, but ending with `.csv`.
+    which maps the barcodes used in the sequencing, to sample names. The run
+    script we will use expect such a barcode file in the
+    `/data/trana/barcodesheets` directory, with the same name as the data
+    folder, but ending with `.csv`.
 
-   We have already created a barcodesheet for you, which is available in the
-   data we just downloaded, so we just need to put this file in the correct place:
+    We have already created a barcodesheet for you, which is available in the
+    data we just downloaded, so we just need to put this file in the correct place:
 
-   We create the folder:
+    So we copy the barcodesheet into place:
 
-   ```bash
-   mkdir -p /data/trana/barcodesheets
-   ```
-
-   ... and put the barcodesheet there:
-
-   ```bash
-   cp 16s_ont_example/16s_ont_example.csv /data/trana/barcodesheets
-   ```
+    ```bash
+    cp 16s_ont_example/16s_ont_example.csv /data/trana/barcodesheets
+    ```
 
 3. Adjust CPU and memory settings for Nextflow
 
@@ -186,4 +180,7 @@ data and run Trana on it.
     ./detect-data-and-run.sh
     ```
 
-    **(TO BE CONTINUED!)**
+    Note that this can take possibly several hours, due to very long times for
+    pulling down Singularity images!
+
+    *(To be continued!)*
