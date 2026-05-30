@@ -1,4 +1,4 @@
-# Exercise 2: Install and run the Emu-based Trana pipeline
+# Exercise 3: Install and run the Emu-based Trana pipeline
 
 *(Note that you can view an outline of this document by clicking the icon that
 looks like a bullet point list, to the far right just above the header above)*
