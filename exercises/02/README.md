@@ -134,7 +134,41 @@ data and run Trana on it.
    cp 16s_ont_example/16s_ont_example.csv /data/trana/barcodesheets
    ```
 
-3. Now we are ready to run the pipeline using the start script.
+3. Adjust CPU and memory settings for Nextflow
+
+    The last thing we need to do is to adjust the max CPU and memory settings,
+    which are optimized for GridIon in the config file shipped with the test
+    script.
+
+    If we run on GitHub codespaces, or a local laptop, we need to adjust these.
+
+    If you are on GitHub codespaces, open the file
+    `/data/trana/install/gridion.config` and change according to this diff:
+
+    ```diff
+    params {
+    -    max_memory = '60.GB'
+    -    max_cpus   = 16
+    +    max_memory = '6.GB'
+    +    max_cpus   = 2
+         max_time   = '72.h'
+     }
+
+     process {
+         resourceLimits = [
+    -        cpus: 16,
+    -        memory: '60.GB',
+    +        cpus: 2,
+    +        memory: '6.GB',
+             time: 72.h
+    ]
+    ```
+
+    If you are using a local laptop, you might be able to use a slightly higher
+    number of cores and memory, depending on your laptop's hardware specs.
+
+
+4. Now we are ready to run the pipeline using the start script.
 
     We first move to the run folder, where the run scripts are and where also
     all logs will be stored, in a `logs` folder:
