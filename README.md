@@ -39,4 +39,9 @@ caveats that can help improving the experience.
 
 - [Sandbox.bio](https://sandbox.bio/tutorials) contains a number of great
   tutorials on common Linux commands and bioinformatics tools like awk and
-  seqkit, where you can follow along and try out the commands in the browser
+  seqkit, where you can follow along and try out the commands in the browser.
+  A few tutorials especially relevant to this course are listed below:
+  - [Terminal basics](https://sandbox.bio/tutorials/terminal-basics)
+  - [Wrangle FASTA and FASTQ with SeqKit](https://sandbox.bio/tutorials/seqkit-intro)
+  - [BAM parsing with samtools](https://sandbox.bio/tutorials/samtools-intro)
+  - [Data exploration with awk](https://sandbox.bio/tutorials/awk-intro)
