@@ -141,3 +141,25 @@ needed.
     button.
 
     Were the results as you expected?
+
+## More things you can do with samtools
+
+### Extracting unclassified reads
+
+There are many more things you can do with samtools.
+
+For example, to extract unclassified reads, you can use:
+
+```bash
+samtools view -f 4 <samfile> | less -S
+```
+
+... or even output fastq directly:
+
+```bash
+samtools fastq -f 4 <sam-file> > unclassified.fq
+```
+
+Note though that Emu also has an option to output unclassified reads in a
+separate file directly, using the `--output-unclassified` flag. See more info
+about that [in the Emu README file](https://github.com/treangenlab/emu#abundance-estimation-parameters)

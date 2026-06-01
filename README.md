@@ -34,3 +34,9 @@ caveats that can help improving the experience.
     ```bash
     export PS1="$ "
     ```
+
+## More resources
+
+- [Sandbox.bio](https://sandbox.bio/tutorials) contains a number of great
+  tutorials on common Linux commands and bioinformatics tools like awk and
+  seqkit, where you can follow along and try out the commands in the browser
