@@ -35,6 +35,43 @@ caveats that can help improving the experience.
     export PS1="$ "
     ```
 
+## Some caveats: Getting help
+
+There are a number of ways to find documentation about commands in the terminal
+on Linux, of which some are not widely known. Below are some caveats to point
+you to what is available.
+
+- `help` - The `help` command by default shows a very brief "cheatsheet" for
+  commands that are not separate tools, but built-in functions in bash,  such
+  as for-loops, if-statements etc, which can be very useful, as their syntax is
+  a bit different from other languages. Note also that you might want to pipe
+  the output to less if it does not fit in your terminal: `help | less -S`. You
+  can also specify the command you want help for, after `help`, e.g: `help for`,
+  which will give slightly more verbose output.
+
+- `man <command>` - Very many commands have a manual page, which you can read
+  with the `man` command, followed by the command in question. Use your arrows
+  to navigate, `/` to search (`n` for next and `N` for previous), and quit with
+  q. Note that in the far end (which you can reach with `Home` or pressing
+  `Page Down` a few times), there is often a section with examples, which can
+  be very very useful.
+
+- `<command> -h` or `<command> --help` - The last resort, if you don't find a
+  help or man page for a command, is to try to use the `--help` or `-h` flag on
+  the tool itself. This should hopefully give you at least some brief usage
+  info and help.
+
+- Pipe all to `less -S` - Sometimes the help screens from commands do for some
+  mysterious reason get redirected to stderr instead of stdout, meaning that
+  you can not pipe the content to a reader such as `less`, in order to be able
+  to scroll and search it. This can generally be fixed by piping the content
+  with `|&` instead of just `|`. This will make sure that both stdout and
+  stderr are piped via stdout to the next command, just as usual. Full example:
+
+  ```bash
+  man -h |& less -S
+  ```
+
 ## More resources
 
 - [Sandbox.bio](https://sandbox.bio/tutorials) contains a number of great
