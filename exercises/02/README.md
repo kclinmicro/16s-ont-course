@@ -1,4 +1,4 @@
-# Exercise 2: sierra-local and HIV drug resistance database
+# Exercise 2: Run sierra-local and check the HIV drug resistance database
 
 [sierra-local](https://github.com/PoonLab/sierra-local) is a local implementation of the Stanford HIVdb algorithm for mutation-based resistance scoring using consensus sequences.
 

@@ -9,8 +9,8 @@ Project repo for following course on bioinformatics for for HIV drug-resistance 
 For the exercises, see the `/exercises` folder, or the links below:
 
 1. [Exercise 1: Installation](https://github.com/kclinmicro/hiv-drug-resistance-course/tree/main/exercises/01)
-3. [Exercise 2: sierra-local and HIV drug resistance database](https://github.com/kclinmicro/hiv-drug-resistance-course/tree/main/exercises/02)
-2. [Exercise 3: Install and run Trana and TranaVy via install script](https://github.com/kclinmicro/hiv-drug-resistance-course/tree/main/exercises/03)
+3. [Exercise 2: Run sierra-local and check the HIV drug resistance database](https://github.com/kclinmicro/hiv-drug-resistance-course/tree/main/exercises/02)
+2. [Exercise 3: Run nf-core/viralrecon pipeline](https://github.com/kclinmicro/hiv-drug-resistance-course/tree/main/exercises/03)
 
 ## Some GitHub codespaces caveats
 
