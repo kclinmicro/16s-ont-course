@@ -1,165 +1,129 @@
-# Exercise 2: Troubleshoot Emu output - Extract selected reads etc
+# Exercise 2: sierra-local and HIV drug resistance database
 
-This exercise requires that you have first ran Exercise 1, as it will be using
-data resulting from running Emu.
+[sierra-local](https://github.com/PoonLab/sierra-local) is a local implementation of the Stanford HIVdb algorithm for mutation-based resistance scoring using consensus sequences.
 
-In this exercise we will be extracting reads for a particular species, as a way
-to demonstrate how you can investigate specific classifications manually when
-needed.
+## sierra-local arguments
 
-1. Enter the folder where you ran [Exercise 1](https://github.com/kclinmicro/16s-ont-course/tree/main/exercises/01)
-
-    E.g:
+1. Actiavte the pixi environment installed in the previous analysis
 
     ```bash
-    cd ex1
-    ```
-
-2. Activate the Pixi environment you created there:
-
-    ```bash
+    cd hiv/
     pixi shell
     ```
 
-3. Install samtools and seqkit via Pixi, as we will need them later:
+2. Check the arguments of `sierra-local`.
+   The default HIV database used for the analysis is not the latest. You can either pre-download the latest database and provide it as an argument, or you can use the `--forceupdate` argument to update the database to the latest version during the analysis.
+
+    ```
+    $ sierralocal -h
+    usage: sierralocal [-h] [-o OUTFILE] [-xml XML] [-json JSON] [--cleanup] [--forceupdate] [-alignment {post,nuc}] [-apobec_csv APOBEC_CSV] [-unusual_csv UNUSUAL_CSV] [-sdrms_csv SDRMS_CSV] [-mutation_csv MUTATION_CSV]
+                       [-updater_outdir UPDATER_OUTDIR]
+                       fasta [fasta ...]
+
+    Local execution of Stanford HIVdb algorithm for mutation-based resistance scoring of sequences.
+
+    positional arguments:
+      fasta                 List of input files.
+
+    options:
+      -h, --help            show this help message and exit
+      -o OUTFILE            Output filename.
+      -xml XML              <optional> Path to HIVdb ASI2 XML file (default: HIVDB_9.4.xml)
+      -json JSON            <optional> Path to JSON HIVdb APOBEC DRM file
+      --cleanup             Deletes NucAmino alignment file after processing.
+      --forceupdate         Forces update of HIVdb algorithm. Requires network connection.
+      -alignment {post,nuc}
+                            Alignment program to use, "post" for post align and "nuc" for nucamino
+      -apobec_csv APOBEC_CSV
+                            <optional> Path to CSV APOBEC csv file (default: apobecs.csv)
+      -unusual_csv UNUSUAL_CSV
+                            <optional> Path to CSV file to determine if is unusual (default: rx-all_subtype-all.csv)
+      -sdrms_csv SDRMS_CSV  <optional> Path to CSV file to determine SDRM mutations (default: sdrms_hiv1.csv)
+      -mutation_csv MUTATION_CSV
+                            <optional> Path to CSV file to determine mutation type (default: mutation-type-pairs_hiv1.csv)
+      -updater_outdir UPDATER_OUTDIR
+                            <optional> Path to folder to store updated files from updater (default: sierralocal/data folder)
+    ```
+
+## HIV drug resistance database
+
+The database used by `sierra-local` is originally from [Stanford HIVdb](https://hivdb.stanford.edu/hivdb/by-patterns/).
+For a better understanding of the HIV drug-resistance testing database, we need to clone the `sierral-local` repository locally.
+
+1. Create a folder for your exercise outside of the pixi environment:
 
     ```bash
-    pixi add samtools seqkit
+    cd ../hiv
+    mkdir -p exercise1
+    cd exercise1
     ```
 
-4. Locate the `.sam`-file in the emu output:
+2. Clone the sierra-local repo:
 
     ```bash
-    find -name '*.sam'
+    git clone https://github.com/PoonLab/sierra-local.git
     ```
 
-5. Now you can have a look at this file with samtools:
+3. Download the latest HIVdb and save it to the `sierralocal/data` folder. You can also re-direct the output to a different folder
+    with the `-update_outdir` argument, if you want to save it somewhere else.
 
     ```bash
-    samtools view ./emuout/sample01.fq_emu_alignments.sam | less -S
+    python3 sierralocal/updater.py # saved in sierralocal/data folder
     ```
 
-    You will see that the first rows, and the first three columns look like
-    this:
+4. Check the latest HIVdb in the `sierra-local/sierralocal/data` folder on the left side of the window.
+
+    Some files are hardcoded in `sierra-local`, but the following files can be updated to the latest version:
 
     ```bash
-    f56c2a13-e09f-424e-9151-b548e0c36ff4    0       1639:emu_db:33855
-    f56c2a13-e09f-424e-9151-b548e0c36ff4    256     1639:emu_db:33891
-    f56c2a13-e09f-424e-9151-b548e0c36ff4    256     1639:emu_db:33875
-    f56c2a13-e09f-424e-9151-b548e0c36ff4    272     1639:emu_db:33896
-    f56c2a13-e09f-424e-9151-b548e0c36ff4    272     1639:emu_db:33952
+    HIVDB_10.2.xml                  - XML file containing the HIVdb algorithm.
+    apobec_drms.json                - JSON file containing the APOBEC DRM data.
+    apobec.csv                      - CSV file containing the APOBEC mutations.
+    mutation-type-pairs_hiv1.csv    - CSV file containing the mutation type pairs.
+    rx-all_subtype-all.csv          - CSV file containing the unusual mutations.
+    sdrms_hiv1.csv                  - CSV file containing the SDRM mutations.
     ```
 
-    The third column here contains an NCBI tax ID as its first field, which
-    means we can extract reads based on this.
+## sierra-local test run
 
-6. We can start by checking which are the most common taxids, by extracting
-   this field, sorting, counting and sorting again based on occurence:
+1. Download a test dataset from the `sierra-local` repository:
 
     ```bash
-    samtools view emuout/sample01.fq_emu_alignments.sam \
-        | cut -f3 \
-        | cut -d: -f1 \
-        | sort \
-        | uniq -c \
-        | sort -nr \
-        | less -S
-    ```
-
-    Then we might see results like:
+    python3 scripts/retrieve_hivdb_data.py RT RT.fa
 
     ```
-    7040 1639
-    6695 1280
-    6001 1613
-    5784 1423
-    5690 1351
-    2333 28901
-    2182 562
-    1310 287
-    1168 1680
-     608 1127744
-    ```
 
-    Here, we see the counts on field 1, and the tax ids in field 2.
+2: Run `sierra-local`. For usage of `sierra-local`, you can either check the online [tutorial](https://github.com/PoonLab/sierra-local/tree/dev)
+    or check the `README.md` file in the cloned sierra-local repository. There are two ways to run `sierra-local`:
 
-7. Now, the reason we would want to extract reads from some specific species
-    would most reasonably be because we have seen that they have lower alignment
-    quality of some kind, something we can not easily see from the Emu output
-    alone, but which can be easier seen by the metrics calculated by the TranaVy
-    reporting tool we will use in Exercise 3.
-
-    But so for the time being, we just imagine that we want to extract those
-    "Salmonella enterica" reads with ID 28901 (You can use the [NCBI Taxonomy lookup page](https://www.ncbi.nlm.nih.gov/taxonomy/)
-    to check that).
-
-    To extract those, we can use a bit of awk-fu, combined with filtering for
-    non-zero mapping qualities, to only get those reads that got a unique
-    alignment:
+- Option1: include the `--forceupdate` argument to update the database to the latest version during the analysis.
 
     ```bash
-    samtools view -e "mapq > 0" emuout/sample01.fq_emu_alignments.sam \
-      | awk -F"\t" '$3 ~ "28901:emu_db.*"' \
-      | less -S
+    sierralocal --forceupdate -updater_outdir hivdb_latest RT.fa -o RT_results.json
     ```
 
-    We see that we don't get so many reads now, which is nice if we want to try
-    to blast them.
-
-    What we need to do to turn this into a fastq file, is to extract three things:
-    - The read ID
-    - the sequence
-    - and the quality field.
-
-    This we can do by extending the command above with a `cut` command for
-    fields 1,10 and 11:
+- Option2: use the pre-downloaded latest HIVdb in the `sierralocal/data` folder.
 
     ```bash
-    samtools view -e "mapq > 0" emuout/sample01.fq_emu_alignments.sam \
-      | awk -F"\t" '$3 ~ "28901:emu_db.*"' \
-      | cut -f 1,10 \
-      | less -S
+    sierralocal RT.fa -o RT_results.json \
+        -xml sierralocal/data/HIVDB_10.2.xml \
+        -json sierralocal/data/apobec_drms.json \
+        -apobec_csv sierralocal/data/apobecs.csv \
+        -unusual_csv sierralocal/data/rx-all_subtype-all.csv \
+        -sdrms_csv sierralocal/data/sdrms_hiv1.csv \
+        -mutation_csv sierralocal/data/mutation-type-pairs_hiv1.csv
     ```
 
-    This can finally be piped to `seqkit tab2fx` to convert it to fasta:
+3. View the result JSON file on the left side of the window or in the terminal with the `less` command:
 
     ```bash
-    samtools view -e "mapq > 0" emuout/sample01.fq_emu_alignments.sam \
-      | awk -F"\t" '$3 ~ "28901:emu_db.*"' \
-      | cut -f 1,10 \
-      | seqkit tab2fx > salmonella_enterica.fa
+    less RT_results_v1.json
     ```
 
-    (Hint: If we also included the quality string field in column 11, we could
-    get fastq-files in the same way!)
+## Take home message
 
-8. Now that we have a fasta file, you can send it (or first download it to your
-    computer if you are using GitHub codespaces), and send it to
-    [Blast](https://blast.ncbi.nlm.nih.gov/).
+You can run `sierra-local` locally for the HIV drug resistance scoring algorithm using the consensus sequence data.
 
-    Select "Nucleotide blast", and upload the fasta file via the "Choose file"
-    button.
+`sierra-local` uses the HIVdb database originally from [Stanford HIVdb](https://github.com/hivdb/hivfacts/tree/main/data)
 
-    Were the results as you expected?
-
-## More things you can do with samtools
-
-### Extracting unclassified reads
-
-There are many more things you can do with samtools.
-
-For example, to extract unclassified reads, you can use:
-
-```bash
-samtools view -f 4 <samfile> | less -S
-```
-
-... or even output fastq directly:
-
-```bash
-samtools fastq -f 4 <sam-file> > unclassified.fq
-```
-
-Note though that Emu also has an option to output unclassified reads in a
-separate file directly, using the `--output-unclassified` flag. See more info
-about that [in the Emu README file](https://github.com/treangenlab/emu#abundance-estimation-parameters)
+Please remember to update the database to the latest version for your analysis.
