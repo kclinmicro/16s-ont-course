@@ -4,7 +4,7 @@ In Exercise 2, you used `sierra-local` to predict HIV drug resistance from a con
 
 The HIV drug-resistance workflow used in this exercise is available on the `dev` branch. Karolinska Institutet, Karolinska University Laboratory, and the Bioinformatics Unit of Instituto de Salud Carlos III collaborated on the integration. [Sarai Varona](https://github.com/svarona) and [Lili Andersson-Li](https://github.com/LilyAnderssonLee) carried out the original work.
 
-The pipeline supports Illumina and Nanopore sequencing data and can assemble viral genomes and detect low-frequency variants within a host. [nf-core/viralrecon](https://github.com/nf-core/viralrecon/tree/dev)
+The HIV drug-resistance workflow in `nf-core/viralrecon` supports Illumina sequencing data only. [nf-core/viralrecon documentation](https://nf-co.re/viralrecon/dev/docs/output/#illumina-hiv-resistance-detection)
 
 ## Test data
 
@@ -89,9 +89,9 @@ nextflow run nf-core/viralrecon -r dev -profile hiv,docker \
     --outdir results_hiv
 ```
 
-To adjust CPU, memory, or time limits for your dataset, put the settings in a custom configuration file and pass its path with `-c custom.config`. [nf-core configuration options](https://nf-co.re/docs/running/configuration/configuration-options)
+To adjust CPU, memory, or time limits for your dataset, put the settings in a custom configuration file and pass its path with `-c custom.config`. For details, please check [nf-core configuration options](https://nf-co.re/docs/running/configuration/configuration-options)
 
-For help preparing a sample sheet and choosing HIV-specific parameters, see the pipeline documentation. [nf-core/viralrecon HIV usage guide](https://github.com/nf-core/viralrecon/blob/dev/docs/usage.md#hiv)
+For help preparing a sample sheet and choosing HIV-specific parameters, see the pipeline documentation [nf-core/viralrecon HIV usage guide](https://github.com/nf-core/viralrecon/blob/dev/docs/usage.md#hiv)
 
 ### Run the analysis with a parameter file
 
