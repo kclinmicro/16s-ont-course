@@ -1,0 +1,29 @@
+input: "/path/to/samplesheet.csv"
+outdir: "/path/to/results/"
+platform: illumina
+
+genome: "codfreq"
+fasta: "/path/to/codfreq.fasta"
+gff: "/path/to/codfreq.gff"
+
+kraken2_db: "/path/to/kraken2_human.tar.gz"
+
+perform_hiv_resistance: true
+variant_caller: ivar
+consensus_caller: ivar
+
+hivdb_xml: "/path/to/HIVDB_10.2.xml"
+apobec_drm: "/path/to/apobec_drms.json"
+apobec_csv: "/path/to/apobecs.csv"
+unusual_csv: "/path/to/rx-all_subtype-all.csv"
+sdrms_csv: "/path/to/sdrms_hiv1.csv"
+mutation_csv: "/path/to/mutation-type-pairs_hiv1.csv"
+
+nextclade_dataset: neherlab/hiv-1
+nextclade_dataset_name: neherlab/hiv-1
+nextclade_dataset_tag: 2025-09-09--12-13-13Z
+
+skip_assembly: true
+skip_pangolin: true
+skip_freyja: true
+skip_freyja_boot: true

@@ -10,11 +10,11 @@ For the exercises, see the `/exercises` folder, or the links below:
 
 1. [Exercise 1: Installation](https://github.com/kclinmicro/hiv-drug-resistance-course/tree/main/exercises/01)
 3. [Exercise 2: Run sierra-local and check the HIV drug resistance database](https://github.com/kclinmicro/hiv-drug-resistance-course/tree/main/exercises/02)
-2. [Exercise 3: Run nf-core/viralrecon pipeline](https://github.com/kclinmicro/hiv-drug-resistance-course/tree/main/exercises/03)
+2. [Exercise 3: Run the nf-core/viralrecon pipeline](https://github.com/kclinmicro/hiv-drug-resistance-course/tree/main/exercises/03)
 
 ## Some GitHub codespaces caveats
 
-If you are using GitHub codespaces to run the exercises, we noticed a few small
+If you are using [GitHub codespaces](https://github.com/codespaces) to run the exercises, we noticed a few small
 caveats that can help improving the experience.
 
 1. Sometimes the prompt string (the part just before your cursor), can get
