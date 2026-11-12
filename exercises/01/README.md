@@ -2,8 +2,8 @@
 
 Install tools needed for the exercises in the course:
 
-- [sierra-local](https://github.com/PoonLab/sierra-local)
 - [nextflow](https://github.com/nextflow-io/nextflow)
+- [sierra-local](https://github.com/PoonLab/sierra-local)
 
 *(Note that you can view an outline of this document by clicking the icon that
 looks like a bullet point list, to the far right just above the header above)*
@@ -32,6 +32,7 @@ using Pixi instead of Conda, for greater speed and flexibility.
     ```
 
     But there are [alternative installation methods](https://pixi.prefix.dev/latest/installation/#alternative-installation-methods) too.
+
 2. Reload your shell, for example by executing bash again:
 
     ```bash
@@ -63,11 +64,15 @@ using Pixi instead of Conda, for greater speed and flexibility.
    You can see that you have the pixi environment loaded by the `(hiv)` part
    added to the left in your terminal.
 
-6. Now you can install nextflow via Pixi:
+6. Now you can install Nextflow Sierra-Local and some other required
+   tools via Pixi:
 
     ```bash
     pixi add nextflow=25.10.4 sierra-local=0.4.4 python=3.10 tree
     ```
+
+    (As you can see, you can specify the version by appending
+    `=<version>` to a tool name).
 
 7. Done! Now you should be able to check that `nextflow` and `sierra-local` are installed with:
 
@@ -78,4 +83,5 @@ using Pixi instead of Conda, for greater speed and flexibility.
 
 ## Take home message
 
-How to use `pixi` to install and manage software for the exercises.
+You have now learned how to use `pixi` to install and manage software
+for the exercises.
