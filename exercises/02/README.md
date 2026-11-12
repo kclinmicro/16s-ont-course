@@ -53,7 +53,7 @@ For a better understanding of the HIV drug-resistance testing database, we need 
 1. Create a folder for your exercise outside of the pixi environment:
 
     ```bash
-    cd ../hiv
+    cd ..
     mkdir -p exercise1
     cd exercise1
     ```
@@ -68,8 +68,10 @@ For a better understanding of the HIV drug-resistance testing database, we need 
     with the `-update_outdir` argument, if you want to save it somewhere else.
 
     ```bash
-    python3 sierralocal/updater.py # saved in sierralocal/data folder
+    python sierra-local/sierralocal/updater.py
     ```
+
+    This will save output in the `sierralocal/data` folder.
 
 4. Check the latest HIVdb in the `sierra-local/sierralocal/data` folder on the left side of the window.
 
@@ -89,20 +91,22 @@ For a better understanding of the HIV drug-resistance testing database, we need 
 1. Download a test dataset from the `sierra-local` repository:
 
     ```bash
-    python3 scripts/retrieve_hivdb_data.py RT RT.fa
-
+    cd sierra-local
+    python scripts/retrieve_hivdb_data.py RT RT.fa
     ```
 
-2: Run `sierra-local`. For usage of `sierra-local`, you can either check the online [tutorial](https://github.com/PoonLab/sierra-local/tree/dev)
-    or check the `README.md` file in the cloned sierra-local repository. There are two ways to run `sierra-local`:
+2. Run `sierra-local`. For usage of `sierra-local`, you can either check the
+   online [tutorial](https://github.com/PoonLab/sierra-local/tree/dev) or check
+   the `README.md` file in the cloned sierra-local repository. There are two
+   ways to run `sierra-local`:
 
-- Option1: include the `--forceupdate` argument to update the database to the latest version during the analysis.
+- Option 1: include the `--forceupdate` argument to update the database to the latest version during the analysis.
 
     ```bash
     sierralocal --forceupdate -updater_outdir hivdb_latest RT.fa -o RT_results.json
     ```
 
-- Option2: use the pre-downloaded latest HIVdb in the `sierralocal/data` folder.
+- Option 2: use the pre-downloaded latest HIVdb in the `sierralocal/data` folder.
 
     ```bash
     sierralocal RT.fa -o RT_results.json \
@@ -117,13 +121,14 @@ For a better understanding of the HIV drug-resistance testing database, we need 
 3. View the result JSON file on the left side of the window or in the terminal with the `less` command:
 
     ```bash
-    less RT_results_v1.json
+    less -S RT_results_v1.json
     ```
 
-## Take home message
+## Take home messages
 
-You can run `sierra-local` locally for the HIV drug resistance scoring algorithm using the consensus sequence data.
+You now know how to run `sierra-local` locally for the HIV drug resistance
+scoring algorithm using the consensus sequence data.
 
 `sierra-local` uses the HIVdb database originally from [Stanford HIVdb](https://github.com/hivdb/hivfacts/tree/main/data)
 
-Please remember to update the database to the latest version for your analysis.
+Always remember to update the database to the latest version for your analysis.
