@@ -1,4 +1,3 @@
-# Exercise 3: Run the nf-core/viralrecon pipeline
 
 In Exercise 2, you used `sierra-local` to predict HIV drug resistance from a consensus sequence. In this exercise, you will start with sequencing reads and run HIV drug-resistance analysis as part of the `nf-core/viralrecon` Nextflow pipeline.
 
@@ -10,11 +9,11 @@ The HIV drug-resistance workflow in `nf-core/viralrecon` supports Illumina seque
 
 The exercise uses three publicly available samples. All three also appear in the [Stanford HIVdb sequencing-read examples](https://hivdb.stanford.edu/hivdb/by-reads/).
 
-| Accession | Sequencing target |
-| --- | --- |
-| `DRR030302` | Whole-genome amplicons |
+| Accession    | Sequencing target                          |
+| ---          | ---                                        |
+| `DRR030302`  | Whole-genome amplicons                     |
 | `SRR4071760` | Protease and reverse transcriptase regions |
-| `SRR6937100` | Integrase region |
+| `SRR6937100` | Integrase region                           |
 
 The pipeline's test dataset retains **0.02%** of the original reads from each sample. [Test data sampling procedure](https://github.com/nf-core/test-datasets/tree/viralrecon#sampling-procedure)
 
@@ -25,10 +24,19 @@ The `test_hiv` profile provides the sample sheet and parameters for this exercis
 1. From the `hiv` directory you created in Exercise 1, activate the Pixi environment. If the environment is already active, continue to the next step.
 
    ```bash
+   cd hiv
    pixi shell
+   cd ..
    ```
 
-2. Create a working directory and clone the `dev` branch of the pipeline. Run the remaining commands from inside the cloned `viralrecon` directory.
+2. For this exercise we also need to install Singularity, which we can do via
+   pixi, after the environment is activated above.
+
+   ```bash
+   pixi add singularity
+   ```
+
+3. Create a working directory and clone the `dev` branch of the pipeline. Run the remaining commands from inside the cloned `viralrecon` directory.
 
    ```bash
    mkdir -p exercise2
@@ -39,7 +47,7 @@ The `test_hiv` profile provides the sample sheet and parameters for this exercis
 
    The profile's settings are in [`conf/test_hiv.config`](https://github.com/nf-core/viralrecon/blob/dev/conf/test_hiv.config).
 
-3. If you are using GitHub Codespaces, create `custom.config` to limit the CPU, memory, and time available to each task.
+4. If you are using GitHub Codespaces, create `custom.config` to limit the CPU, memory, and time available to each task.
 
    ```bash
    cat > custom.config <<'CONFIG'
@@ -55,23 +63,23 @@ The `test_hiv` profile provides the sample sheet and parameters for this exercis
 
    If your environment has sufficient resources, you can skip this step and omit `-c custom.config` from the command you choose below.
 
-4. Choose one of the following commands. Both use the `test_hiv` profile and write results to `results_test/`.
+5. Choose one of the following commands. Both use the `test_hiv` profile and write results to `results_test/`.
 
    **Run the development branch directly from GitHub**
 
    ```bash
-   nextflow run nf-core/viralrecon -r dev -profile test_hiv,docker --outdir results_test -c custom.config
+   nextflow run nf-core/viralrecon -r dev -profile test_hiv,singularity --outdir results_test -c custom.config
    ```
 
    **Run the local checkout**
 
    ```bash
-   nextflow run main.nf -profile test_hiv,docker --outdir results_test -c custom.config
+   nextflow run main.nf -profile test_hiv,singularity --outdir results_test -c custom.config
    ```
 
    Allow about 20 minutes for the analysis. The runtime depends on your environment.
 
-5. To resume a run, repeat the same command from the same directory and add `-resume`. Nextflow reuses results from completed tasks when their cache entries and outputs are still available. [How Nextflow resume works](https://seqera.io/blog/demystifying-nextflow-resume/)
+6. To resume a run, repeat the same command from the same directory and add `-resume`. Nextflow reuses results from completed tasks when their cache entries and outputs are still available. [How Nextflow resume works](https://seqera.io/blog/demystifying-nextflow-resume/)
 
 Congratulations on completing the exercise! Give yourself a round of applause!
 
@@ -84,7 +92,7 @@ The bonus tips below can help you use `nf-core/viralrecon` in future analyses.
 The `hiv` profile loads the recommended settings for HIV drug-resistance analysis from `conf/hiv.config`. Replace `your_samplesheet.csv` with the path to your sample sheet. The example writes results to `results_hiv/`.
 
 ```bash
-nextflow run nf-core/viralrecon -r dev -profile hiv,docker \
+nextflow run nf-core/viralrecon -r dev -profile hiv,singularity \
     --input your_samplesheet.csv \
     --outdir results_hiv
 ```
@@ -98,7 +106,7 @@ For help preparing a sample sheet and choosing HIV-specific parameters, see the 
 You can save pipeline parameters in a YAML file and pass it to Nextflow with `-params-file`. Open the example file, replace the placeholder paths with paths for your analysis, and run the command from the directory that contains the file. [Example parameter file](example_params.yaml)
 
 ```bash
-nextflow run nf-core/viralrecon -r dev -profile docker -params-file example_params.yaml
+nextflow run nf-core/viralrecon -r dev -profile hiv,singularity -params-file example_params.yaml
 ```
 
 ## Get help
