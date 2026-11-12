@@ -2,11 +2,29 @@
 
 Project repo for following course on bioinformatics for for HIV drug-resistance testing using Illumina sequencing data, to be given at the ECDC course portal in December 2026:
 
-[GenEpi-BioTrain - Virtual Training 31 - Clinical application of Illumina sequencing in diagnostic HIV drug-resistance testing]()
+[GenEpi-BioTrain - Virtual Training 31 - Clinical application of Illumina sequencing in diagnostic HIV drug-resistance testing](https://learning.ecdc.europa.eu/enrol/index.php?id=1323)
+
+## Prerequisites
+
+These exercises requires you to have access to a Linux computer. This could be
+one of:
+
+1. On Linux: If you have a locally installed Linux, preferrably based on Debian
+   or Ubuntu, you should be able to use it as is.
+2. On Macs: Ubuntu (or similar, like Linux Mint), running in a Virtual Machine
+   like [UTM](https://getutm.app/) (easy option) or [Lima](https://lima-vm.io/)
+   (more powerful but slightly harder to set up).
+3. On Windows: Debian or Ubuntu-based image in [WSL (Windows Subsystem for Linux)](https://learn.microsoft.com/en-us/windows/wsl/).
+4. As a backup, you can also use the cloud-based [GitHub codespaces](https://github.com/codespaces),
+   which is very easy to get started with, if you have a GitHub account.
+
+For more detailed instructions on all of these options, see
+[this section in the course page](https://learning.ecdc.europa.eu/mod/page/view.php?id=45425).
 
 ## Exercises
 
-For the exercises, see the `/exercises` folder, or the links below:
+For the exercises, see the `exercises/` folder here in the repository, or the
+links below:
 
 1. [Exercise 1: Installation](https://github.com/kclinmicro/hiv-drug-resistance-course/tree/main/exercises/01)
 3. [Exercise 2: Run sierra-local and check the HIV drug resistance database](https://github.com/kclinmicro/hiv-drug-resistance-course/tree/main/exercises/02)
